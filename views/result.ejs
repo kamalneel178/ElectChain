@@ -1,0 +1,61 @@
+<% include header.ejs %>
+
+	<script src="dist/2.7.2/Chart.bundle.js"></script>
+	<script src="utils.js"></script>
+	<style>
+		canvas {
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+		}
+	</style>
+	<div id="canvas-holder" style="width:100%">
+		<canvas id="chart-area"></canvas>
+	</div>
+	<script>
+		var config = {
+			type: 'doughnut',
+			data: {
+				datasets: [{
+					data: [
+						electionResults.candidate1,
+						electionResults.candidate2,
+						electionResults.candidate3
+					],
+					backgroundColor: [
+						window.chartColors.red,
+						window.chartColors.blue,
+						window.chartColors.green
+					],
+					label: 'Elections'
+				}],
+				labels: [
+					'candidate1',
+					'candidate2',
+					'candidate3'
+				]
+			},
+			options: {
+				responsive: true,
+				legend: {
+					position: 'top',
+				},
+				title: {
+					display: true,
+					text: 'Election Results'
+				},
+				animation: {
+					animateScale: true,
+					animateRotate: true
+				}
+			}
+		};
+
+		window.onload = function () {
+			var ctx = document.getElementById('chart-area').getContext('2d');
+			window.myDoughnut = new Chart(ctx, config);
+		};
+	</script>
+	</body>
+
+	</html>
